@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import { GoogleGenAI, Modality, Type } from "@google/genai";
-import { createServer as createViteServer } from "vite";
 
 dotenv.config();
 
@@ -206,6 +205,7 @@ Return valid JSON matching the exact schema.
 // Vite middleware & Static serving
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",

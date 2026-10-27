@@ -177,8 +177,15 @@ export default function App() {
       });
 
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || '발음 분석 요청에 실패했습니다.');
+        let errMessage = `서버 오류 (HTTP ${res.status})`;
+        try {
+          const err = await res.json();
+          errMessage = err.error || err.message || errMessage;
+        } catch {
+          const rawText = await res.text().catch(() => '');
+          if (rawText) errMessage += `: ${rawText.slice(0, 150)}`;
+        }
+        throw new Error(errMessage);
       }
 
       const data: SentenceAnalysis = await res.json();
@@ -220,8 +227,15 @@ export default function App() {
       });
 
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || '음성 생성 요청에 실패했습니다.');
+        let errMessage = `서버 오류 (HTTP ${res.status})`;
+        try {
+          const err = await res.json();
+          errMessage = err.error || err.message || errMessage;
+        } catch {
+          const rawText = await res.text().catch(() => '');
+          if (rawText) errMessage += `: ${rawText.slice(0, 150)}`;
+        }
+        throw new Error(errMessage);
       }
 
       const data = await res.json();
