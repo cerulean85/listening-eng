@@ -1,0 +1,6 @@
+{
+  "name": "Native English Pronunciation (원어민 영어 발음 리더)",
+  "description": "입력한 영어 문장을 사실적인 원어민 발음으로 읽어주고 발음기호, 연음 팁, 섀도잉 연습을 지원하는 영어 발음 학습 앱",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
